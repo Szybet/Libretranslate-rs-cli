@@ -6,3 +6,20 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+futures = "0.3"
+futures-executor = { version = "0.3", features = ["thread-pool"] }
+libretranslate = { path = "lib-rs/libretranslate-rs" }
+
+[lib]
+# https://users.rust-lang.org/t/does-crate-type-has-effect-on-integration-test/76634
+# That's so dumb
+# Add rlib for working tests
+# Remove rlib for working CPP library
+crate-type = ["staticlib"] # , "rlib"
+
+[profile.release]
+strip = true
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"   # remove this for some debug info
