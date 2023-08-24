@@ -6,7 +6,8 @@
 
 cargo install cross
 RUSTFLAGS='-C link-arg=-s' ~/.cargo/bin/cross build --release --target armv7-unknown-linux-musleabihf
-mv target/armv7-unknown-linux-musleabihf/release/Libretranslate-rs-to-cpp.a lib/
 
-cargo install cbindgen
-~/.cargo/bin/cbindgen . -o lib/include/libreader-rs.h
+#cargo install cbindgen
+#~/.cargo/bin/cbindgen . -o lib/include/libreader-rs.h
+
+sshpass -p root scp target/armv7-unknown-linux-musleabihf/release/Libretranslate-rs-cli root@192.168.2.2:/kobo/
